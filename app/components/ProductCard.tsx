@@ -4,7 +4,7 @@ import AddToCard from "./AddToCard";
 
 const ProductCard = () => {
   return (
-    <div className="p-5 my-5 bg-sky-400 text-white hover:bg-zinc-800 text-red">
+    <div>
       {/* <button onClick={() => console.log("Hello")}>Add to cart</button> */}
       {/*  There is a problem in here if we use this component, 
       "vent handlers cannot be passed to Client Component props."
