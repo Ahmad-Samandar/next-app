@@ -20,25 +20,48 @@ import { prisma } from "@/prisma/client";
 //   );
 // }
 
+// export async function GET(request: NextRequest) {
+//   const listOfProducts = await prisma.product.findMany();
+//   return NextResponse.json(listOfProducts);
+// }
+
+// export async function POST(request: NextRequest) {
+//   const body = await request.json();
+//   const validation = ProductSchema.safeParse(body);
+
+//   // Check if the required fields are present in the request
+//   if (!validation.success)
+//     return NextResponse.json(validation.error.errors, { status: 400 });
+
+// const createProduct = prisma.product.create({
+//   data: {
+//     name: body.name,
+//     price: body.price,
+//   },
+// });
+
+//   return NextResponse.json(createProduct, { status: 201 });
+// }
+
 export async function GET(request: NextRequest) {
-  const listOfProducts = await prisma.product.findMany();
-  return NextResponse.json(listOfProducts);
+  const products = await prisma.product.findMany();
+  return NextResponse.json(products);
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const validation = ProductSchema.safeParse(body);
 
-  // Check if the required fields are present in the request
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 400 });
 
-  const createProduct = prisma.product.create({
+  // If validation pass then go ahead and add the product to database
+  const newProduct = await prisma.product.create({
     data: {
       name: body.name,
       price: body.price,
     },
   });
 
-  return NextResponse.json(createProduct, { status: 201 });
+  return NextResponse.json(newProduct);
 }

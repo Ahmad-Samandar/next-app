@@ -27,3 +27,11 @@ model Product {
   name  String @unique
   price Float
 }
+
+model Student {
+  id        Int     @id @unique @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String  @unique
+  isActive  Boolean @default(true)
+}
