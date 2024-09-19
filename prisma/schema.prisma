@@ -35,3 +35,12 @@ model Student {
   email     String  @unique
   isActive  Boolean @default(true)
 }
+
+model Course {
+  id               Int     @unique @default(autoincrement())
+  courseName       String
+  courseCode       String  @unique
+  courseCredits    Int
+  courseInstructor String
+  isActive         Boolean @default(true)
+}
